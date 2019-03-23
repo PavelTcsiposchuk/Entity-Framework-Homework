@@ -30,7 +30,7 @@ namespace Entity_Framework_Homework
             modelBuilder.Entity<Band>().HasKey(p => p.Name);
             modelBuilder.Entity<Musician>().HasKey(p => new { p.Surname, p.FirstName} ); //key like this isn`t very comfortable, but it is test project
             modelBuilder.Entity<Musician>().Property(p => p.Country).IsOptional();
-            //modelBuilder.Entity<Musician>().Property(p => p.Band).IsRequired();
+            
             modelBuilder.Entity<Musician>().Property(p => p.Age).IsOptional();
             modelBuilder.Entity<Musician>().Property(p => p.Role).IsOptional();
             modelBuilder.Entity<Band>().Property(p => p.Genre).IsOptional();

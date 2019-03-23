@@ -11,9 +11,10 @@ namespace Entity_Framework_Homework
     {
         protected override void Seed(ApplicationContext db)
         {
-            if (db == null)
-                Console.WriteLine("Null");
-            
+            SaveObjectsAsync(db).Wait();
+        }
+        private async Task SaveObjectsAsync(ApplicationContext db)
+        {
             Band Rammstein = new Band { Name = "Rammstein", Genre = "Industrial", Members = new List<Musician>() };
             Band OstFront = new Band { Name = "OstFront", Members = new List<Musician>() };
             Band BI2 = new Band { Name = "Би-2", Genre = "Rock", Members = new List<Musician>() };
@@ -42,42 +43,22 @@ namespace Entity_Framework_Homework
             AddBandsToDatabase(db, Rammstein, OstFront, BI2);
 
             AddMusicansToDatabase(db, m1, m2, m3, m4, m5, m6, m7, m8);
-            //Console.WriteLine("Я в инициализаторе");
 
-            db.SaveChanges();
 
-            //var bands = db.Bands;
-            ////var members = context.Musicians;
-            ////Console.WriteLine(bands.Count<Band>());
-            //foreach (var band in bands)
-            //{
-            //    Console.WriteLine(band.ToString());
-            //    if (band.Members == null)
-            //        Console.WriteLine("null");
-            //    else Console.WriteLine(band.Members.Count());
-
-            //}
-
+            await db.SaveChangesAsync();
         }
-
         private void AddMusicansToDatabase(ApplicationContext db,params Musician [] musician)
         {
             foreach(var st in musician)
             {
                 db.Musicians.Add(st);
-
-                
             }
         }
-
         private void AddBandsToDatabase(ApplicationContext db, params Band [] bands)
         {
             foreach (var st in bands)
             {
                 db.Bands.Add(st);
-                //if (st.Members == null)
-                //    Console.WriteLine("null");
-                //else Console.WriteLine(st.Members.Count());
             }
         }
 

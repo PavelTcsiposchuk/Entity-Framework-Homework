@@ -16,19 +16,11 @@ namespace Entity_Framework_Homework
                 
                 var bands = context.Bands.ToList<Band>();
                 var members = context.Musicians.ToList<Musician>();
-                //Console.WriteLine(bands.Count<Band>());
                 foreach (var band in bands)
                 {
-                    Console.WriteLine(band.ToString());
-                    //if (band.Members == null)
-                    //    Console.WriteLine("null");
-                    //else Console.WriteLine(band.Members.Count());
-
+                    Console.WriteLine(band.ToString());//in ToString method also is called Musician.ToString for all musician in a band
                 }
-                    
-                
-                    
-                
+   
             }
             Console.Read();
 
