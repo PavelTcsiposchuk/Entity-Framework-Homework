@@ -11,10 +11,6 @@ namespace Entity_Framework_Homework
     {
         protected override void Seed(ApplicationContext db)
         {
-            SaveObjectsAsync(db).Wait();
-        }
-        private async Task SaveObjectsAsync(ApplicationContext db)
-        {
             Band Rammstein = new Band { Name = "Rammstein", Genre = "Industrial", Members = new List<Musician>() };
             Band OstFront = new Band { Name = "OstFront", Members = new List<Musician>() };
             Band BI2 = new Band { Name = "Би-2", Genre = "Rock", Members = new List<Musician>() };
@@ -41,18 +37,8 @@ namespace Entity_Framework_Homework
             BI2.Members.Add(m8);
 
             AddBandsToDatabase(db, Rammstein, OstFront, BI2);
-
-            AddMusicansToDatabase(db, m1, m2, m3, m4, m5, m6, m7, m8);
-
-
-            await db.SaveChangesAsync();
-        }
-        private void AddMusicansToDatabase(ApplicationContext db,params Musician [] musician)
-        {
-            foreach(var st in musician)
-            {
-                db.Musicians.Add(st);
-            }
+            db.SaveChangesAsync().Wait();
+            
         }
         private void AddBandsToDatabase(ApplicationContext db, params Band [] bands)
         {
